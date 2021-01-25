@@ -1,51 +1,36 @@
 package com.nu1lifier.cotlinstart
 
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 
 class MainActivity : AppCompatActivity() {
-    private var numberByte: Byte = 5
-    private var numberShort:Short = 32
-    private var numberInt:Int = 23
-    private var numberLong:Long = 32
-    private var numberF:Float = 32.21f
-    private var numberD:Double = 2.12
-    private var text :String = "asdwa"
-    private var ch:Char = 'a'
-    private var counter:Int = 0
-    private var start:Boolean = false
+    private var number1:Int = 6
+    private var number2:Int = 10
+    private var text :String = "<1 is here> and <2 is  here>"
+    private var phrase1:String = ""
+    private var phrase2:String = ""
+    private var tvText1:TextView? = null
+    private var tvText2:TextView? = null
 
-    private var tvText:TextView? = null
-    private var cLayout:ConstraintLayout? = null
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        tvText = findViewById(R.id.tvText)
-        cLayout = findViewById(R.id.cLayout)
+        tvText1 = findViewById(R.id.tvText1)
+        tvText2 = findViewById(R.id.tvText2)
+        var tvText2:TextView = findViewById(R.id.tvText2)
+
+        phrase1 = text.substringAfter('<').substringBefore('>')
+        phrase2 = text.substringAfter('<').substringAfter('<').substringBefore('>')
 
 
-        Thread{
-            start = true
-            while (start){
-                Thread.sleep(1000)
-                   runOnUiThread{
-                       if (counter == 5) cLayout?.setBackgroundColor(Color.BLUE)
-                       tvText?.setText(counter.toString())
-                       counter++
-                   }
+        tvText1?.setText(phrase1)
+        tvText2.setText(phrase2)
 
-            }
-        }.start()
-    }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        start = false
+
     }
 }
